@@ -24,6 +24,8 @@ class AuthController extends Controller
 
         $user->setAttribute('access_token', 'Bearer ' . $user->createToken('login')->plainTextToken);
 
+        $user->groups()->attach('kctFbRJnfj27tFKj');
+
         return success($user);
     }
 
