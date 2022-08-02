@@ -4,9 +4,12 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Weiwait\Helper\ExceptionHandlerRender;
 
 class Handler extends ExceptionHandler
 {
+    use ExceptionHandlerRender;
+
     /**
      * A list of exception types with their corresponding custom log levels.
      *

@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Http\Controllers;
+
+use Illuminate\Broadcasting\BroadcastController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::any('broadcasting/auth', [BroadcastController::class, 'authenticate']); // 授权频道认知
+
+    Route::apiResource('groups', GroupController::class); // 群聊
+    Route::post('message', [MessageController::class, 'store']); // 消息
+});
+
+Route::prefix('auth')->group(function () {
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('login', [AuthController::class, 'login']);
 });
